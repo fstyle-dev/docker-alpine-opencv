@@ -41,6 +41,11 @@ RUN apk add --update --no-cache \
     unzip ${OPENCV_VERSION}.zip && \
     rm -rf ${OPENCV_VERSION}.zip && \
 
+    # download and extract opencv-contrib
+    wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
+    unzip ${OPENCV_VERSION}.zip && \
+    rm -rf ${OPENCV_VERSION}.zip && \
+
     mkdir -p /opt/opencv-${OPENCV_VERSION}/build && \
     cd /opt/opencv-${OPENCV_VERSION}/build && \
     cmake \
@@ -65,8 +70,9 @@ RUN apk add --update --no-cache \
       -D BUILD_opencv_python2=OFF \
       -D BUILD_opencv_python3=OFF \
       -D BUILD_opencv_apps=OFF \
-      -D BUILD_opencv_dnn=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
       .. && \
       make -j"$(getconf _NPROCESSORS_ONLN)" && \
       make install && \
-      rm -rf /opt/opencv-${OPENCV_VERSION}
+      rm -rf /opt/opencv-${OPENCV_VERSION} && \
+      rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
