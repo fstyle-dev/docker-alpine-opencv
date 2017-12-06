@@ -16,23 +16,9 @@ RUN apk add --update --no-cache \
       unzip \
       wget \
       cmake \
-      #Intel® TBB, a widely used C++ template library for task parallelism'
-      libtbb@testing  \
-      libtbb-dev@testing   \
-      # Wrapper for libjpeg-turbo
-      libjpeg  \
-      # accelerated baseline JPEG compression and decompression library
-      libjpeg-turbo-dev \
-      # Portable Network Graphics library
-      libpng-dev \
-      # A software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard (development files)
-    #   jasper-dev \
-      # Provides support for the Tag Image File Format or TIFF (development files)
-      tiff-dev \
-      # Libraries for working with WebP images (development files)
-    #   libwebp-dev \
       # A C language family front-end for LLVM (development files)
       clang-dev \
+      qt5-qtbase-dev \
       linux-headers && \ 
 
     mkdir -p /opt && \
@@ -49,17 +35,23 @@ RUN apk add --update --no-cache \
     mkdir -p /opt/opencv-${OPENCV_VERSION}/build && \
     cd /opt/opencv-${OPENCV_VERSION}/build && \
     cmake \
+      -D CMAKE_FIND_LIBRARY_SUFFIXES=.a \
       -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D BUILD_SHARED_LIBS=OFF \
       -D WITH_FFMPEG=OFF \
       -D WITH_1394=OFF \
-      -D WITH_IPP=OFF \
+      -D WITH_IPP=ON \
+      -D WITH_QT=ON \
       -D WITH_OPENEXR=OFF \
       -D WITH_TBB=YES \
       -D WITH_WEBP=OFF \
+      -D WITH_TIFF=OFF \
+      -D WITH_PNG=OFF \
       -D WITH_JASPER=OFF \
       -D BUILD_TBB=ON \
+      -D BUILD_JPEG=ON \
+      -D BUILD_IPP_IW=ON \
       -D BUILD_FAT_JAVA_LIB=OFF \
       -D BUILD_TESTS=OFF \
       -D BUILD_PERF_TESTS=OFF \
