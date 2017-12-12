@@ -41,7 +41,7 @@ RUN apk add --update --no-cache \
       -D BUILD_SHARED_LIBS=OFF \
       -D WITH_FFMPEG=OFF \
       -D WITH_1394=OFF \
-      -D WITH_IPP=ON \
+      -D WITH_IPP=OFF \
       -D WITH_QT=ON \
       -D WITH_OPENEXR=OFF \
       -D WITH_TBB=YES \
@@ -51,7 +51,8 @@ RUN apk add --update --no-cache \
       -D WITH_JASPER=OFF \
       -D BUILD_TBB=ON \
       -D BUILD_JPEG=ON \
-      -D BUILD_IPP_IW=ON \
+      -D BUILD_IPP_IW=OFF \
+      -D BUILD_ZLIB=ON \
       -D BUILD_FAT_JAVA_LIB=OFF \
       -D BUILD_TESTS=OFF \
       -D BUILD_PERF_TESTS=OFF \
