@@ -2,7 +2,7 @@ FROM alpine
 
 ENV CC /usr/bin/clang
 ENV CXX /usr/bin/clang++
-ENV OPENCV_VERSION=3.4.0-rc
+ENV OPENCV_VERSION=dnn-s3fd
 ENV OPENCV_CONTRIB_VERSION=3.3.1
 
 RUN echo -e '@edgunity http://nl.alpinelinux.org/alpine/edge/community\n\
@@ -24,7 +24,7 @@ RUN apk add --update --no-cache \
 
     mkdir -p /opt && \
     cd /opt && \
-    wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
+    wget https://github.com/fabito/opencv/archive/${OPENCV_VERSION}.zip && \
     unzip ${OPENCV_VERSION}.zip && \
     rm -rf ${OPENCV_VERSION}.zip && \
 
