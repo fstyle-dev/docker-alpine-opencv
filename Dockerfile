@@ -2,7 +2,7 @@ FROM alpine
 
 ENV CC /usr/bin/clang
 ENV CXX /usr/bin/clang++
-ENV OPENCV_VERSION=3.3.1
+ENV OPENCV_VERSION=3.4.0
 
 RUN echo -e '@edgunity http://nl.alpinelinux.org/alpine/edge/community\n\
 @edge http://nl.alpinelinux.org/alpine/edge/main\n\
@@ -65,7 +65,7 @@ RUN apk add --update --no-cache \
       -D BUILD_opencv_apps=OFF \
       -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
       .. && \
-      make -j"$(getconf _NPROCESSORS_ONLN)" && \
+      make -j "$(getconf _NPROCESSORS_ONLN)" && \
       make install && \
       rm -rf /opt/opencv-${OPENCV_VERSION} && \
       rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
